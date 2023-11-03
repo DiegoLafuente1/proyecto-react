@@ -1,16 +1,28 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Titulo from './componentes/Titulo/titulo';
-import NavBar from './componentes/navbar/NavBar.jsx';
-import Card from './componentes/card/card';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NavBar from './componentes/navbar/NavBar';
+import ItemListContainer from './componentes/items/ItemListContainer';
+import ItemList from './componentes/ItemList/ItemList';
+import Item from './componentes/Item/Item';
+import {ItemDetailContainer} from './componentes/ItemDetailContainer/ItemDetailContainer'
+import ItemCount from './componentes/ItemCount/ItemCount';
+import Footer from './componentes/Footer/Footer'
+
+
+
+
 
 function App() {
   return (
-    <>
-      <NavBar/>
-      <Titulo tituloApp="Tienda de Zapatillas" subTituloApp="Encontra lo que queres."/>
-      <Titulo tituloApp="Modelos de zapatillas" subTituloApp="Eleji las zapatillas."/>
-      <Card/>
-    </>
+      <>
+      <NavBar />
+      <ItemListContainer />
+      <Item/>
+      <ItemDetailContainer/>
+      <ItemCount/>
+      <Footer/>
+      </>
   )
 }
 
