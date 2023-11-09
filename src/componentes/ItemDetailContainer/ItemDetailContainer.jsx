@@ -1,30 +1,24 @@
-import './ItemDetailContainer.css'
-import { useState, useEffect } from 'react'
-import {getProductById} from '../../helpers/mFetch'
-import ItemDetail from '../ItemDetail/ItemDetail'
-import { useParams } from 'react-router-dom'
-
+import './ItemDetailContainer.css';
+import { useState, useEffect } from 'react';
+import { getProductById } from '../../helpers/mFetch';
+import ItemDetail from '../ItemDetail/ItemDetail';
+import { useParams } from 'react-router-dom';
 
 const ItemDetailContainer = () => {
-    const [product, setProduct] = useState(null)
+  const [product, setProduct] = useState(null);
+  const { itemId } = useParams();
 
-    const {itemId} = useParams()
+  useEffect(() => {
+    getProductById(itemId)
+      .then((response) => {
+        setProduct(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [itemId]);
 
-    useEffect(() => {
-        getProductById(itemId)
-            .then(response => {
-                setProduct(response)
-            })
-            .catch(error => {
-                console.error(error)
-            })
-    }, [itemId])
+  return <div className='ItemDetailContainer'>{product && <ItemDetail {...product} />}</div>;
+};
 
-    return(
-        <div className='ItemDetailContainer'>
-            <ItemDetail {...product}/>
-        </div>
-    )
-}
-
-export default ItemDetailContainer
+export default ItemDetailContainer;

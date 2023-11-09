@@ -1,33 +1,21 @@
-import { useEffect, useState } from "react";
-import { mFetch } from "../../helpers/mFetch";
-import ItemList from "../ItemList/ItemList";
-import { useParams } from "react-router-dom";
+import ItemList from '../ItemList/ItemList';
+import { useEffect, useState } from 'react';
+import { mFetch } from '../../helpers/mFetch';
 
+const ItemListContainer = () => {
+  const [products, setProducts] = useState([]);
 
+  useEffect(() => {
+    mFetch().then((data) => {
+      setProducts(data);
+    });
+  }, []);
 
-const ItemListContainer = ({greeting}) => {
-    const [products, setProducts] = useState([])
+  return (
+    <div>
+      <ItemList products={products} />
+    </div>
+  );
+};
 
-    const {categoryId} = useParams()
-
-    useEffect (() => {
-        
-
-        mFetch ()
-            .then (response => {
-                setProducts(response)
-            })
-            .catch (error => {
-                console.error(error)
-            })
-    },  [categoryId])
-
-    return (
-        <div>
-            <h1>{greeting}</h1>
-            <ItemList products={products}/>
-        </div>
-    )
-}
-
-export default ItemListContainer
+export default ItemListContainer;
