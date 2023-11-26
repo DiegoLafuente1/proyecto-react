@@ -1,10 +1,6 @@
-.CardItem {
-    
-    margin: 30px;
-   
-}
+.CardItem .ItemImg {
+  width: 350px;
+  height: 450px;
+  padding: 30px;
 
-.ItemImg {
-    width: 350px;
-    height: 350px;
 }

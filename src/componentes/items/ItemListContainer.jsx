@@ -1,15 +1,25 @@
 import ItemList from '../ItemList/ItemList';
 import { useEffect, useState } from 'react';
-import { mFetch } from '../../helpers/mFetch';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase/config';
 
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    mFetch().then((data) => {
-      setProducts(data);
-    });
-  }, []);
+    
+    const productosRef = collection(db, "products");
+    getDocs(productosRef)
+      .then((resp) => {
+        
+        setProducts(
+          resp.docs.map((doc) => {
+            return { ...doc.data(), id: doc.id}
+          })
+        )
+      })
+  });
+
 
   return (
     <div>
